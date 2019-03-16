@@ -1,0 +1,3 @@
+Accounts API
+
+This api is a simple accounts API which follows the RAML Best practices like modularity data types and examples externalization. 
