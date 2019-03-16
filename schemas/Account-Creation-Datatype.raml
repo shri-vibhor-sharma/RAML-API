@@ -1,0 +1,26 @@
+#%RAML 1.0 DataType
+
+
+type: object
+displayName: Accounts Data Type 2
+properties:
+
+  type:
+    enum: [personal, business]
+    required: true
+  firstName:
+    type: string
+    required: true
+  lastName:
+    type: string
+    required: true
+  address:
+    type: string
+  postal:
+    type: string
+  country:
+    type: string
+    minLength: 1
+    maxLength: 999
+  miles:
+   type: integer

@@ -1,0 +1,81 @@
+#%RAML 1.0
+version: v1
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/af077d82-0e6f-4263-a9f3-5b44aaaa85a6/ #
+title: Accounts API
+
+types:
+ AccountType:
+  !include schemas/AccountdataType.raml
+ AccountCreationType:
+  !include schemas/Account-Creation-Datatype.raml
+
+/Accounts:
+  get:
+    description: this method is used to get the accounts
+    headers:
+       Requester-ID:
+        type: string
+        required: true
+    queryParameters:
+        type:
+          enum: ['personal','business']
+        name:
+          required: false
+          type: string
+        country:
+          required: false
+          type: string
+    responses:
+      200:
+        body:
+          application/json:
+            type:  AccountType[]
+            example:
+              !include examples/Accounts-example.raml
+
+
+
+  post:
+    description: Used to create account/accounts.
+    headers:
+       Requester-ID:
+        type: string
+        required: true
+    body:
+      application/json:
+        type: AccountCreationType[]
+        displayName: Create an Account/ Accounts
+        example:
+          !include examples/AccountNoID-example.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              Message: Account creation Successful
+      400:
+        body:
+          application/json:
+            example:
+              Message: Some error occured in the request Cannot create an account
+  /{id}:
+    get:
+      headers:
+        Requester-ID:
+          type: string
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              type: AccountType
+              example:
+               lastName: "sharma"
+               creationDate: 2018-01-01T09:00:00Z
+               address: "kolar road bhopal"
+               type:  personal
+               country: "india"
+               miles: 227
+               postal: "50049"
+               firstName: "Vibhor"
+               id: 1
